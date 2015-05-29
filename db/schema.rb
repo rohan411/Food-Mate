@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150529180205) do
     t.datetime "updated_at",      null: false
     t.string   "name"
     t.string   "twitter_handle"
+    t.string   "session_token"
   end
 
 end
