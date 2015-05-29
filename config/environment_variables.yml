@@ -8,20 +8,20 @@ POSTGRES_DB_PASSWORD: "123456"
 POSTGRES_DB_SU_USER: "su_geo_rails"
 POSTGRES_DB_SU_PASSWORD: "123456"
 
-S3_BUCKET: 'tinyowl-development'
-S3_ACCESS_KEY_ID: AKIAJF57XQBSA6SZXJMQ
-S3_SECRET_ACCESS_KEY: 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
+S3_BUCKET: 'abc'
+S3_ACCESS_KEY_ID: abc
+S3_SECRET_ACCESS_KEY: abc
 
 
 development:
   POSTGRES_DB_NAME: "food_mate_production"
   POSTGRES_TEST_DB_NAME: "tinyowl_test"
-  IMAGES_CLOUDFRONT_CNAME: "dv7xwibs05aww.cloudfront.net"
+  IMAGES_CLOUDFRONT_CNAME: "abc"
 
 test:
   POSTGRES_TEST_DB_NAME: "food_mate_test"
-  IMAGES_CLOUDFRONT_CNAME: "dv7xwibs05aww.cloudfront.net"
+  IMAGES_CLOUDFRONT_CNAME: "abc"
 
 production:
   POSTGRES_DB_NAME: "food_mate_production"
-  IMAGES_CLOUDFRONT_CNAME: "dv7xwibs05aww.cloudfront.net"
+  IMAGES_CLOUDFRONT_CNAME: "abc"
