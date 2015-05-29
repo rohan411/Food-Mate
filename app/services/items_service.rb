@@ -22,8 +22,10 @@ class ItemsService
       raise StandardError.new('Item not found against the item_id')
     end
     choice = UserChoice.where(:user_id => user_id).first
-    choice.item_ids = choice.item_ids.to_s + "," + params[:item_id].to_s
-    tags_unsorted = choice.tags.to_s + "," + item.tags.pluck(:name).map {|str| "#{str}"}.join(',')
+    chosen_item_ids = choice.item_ids rescue nil
+    choice.item_ids = chosen_item_ids.to_s + "," + params[:item_id].to_s
+    chosen_tags = choice.tags rescue nil
+    tags_unsorted = chosen_tags.to_s + "," + item.tags.pluck(:name).map {|str| "#{str}"}.join(',')
     choice.tags = tags_unsorted.split(",").sort.map {|str| "#{str}"}.join(',')
     choice.save
   end
