@@ -18,3 +18,4 @@
 
 environment_variables_sample.yml
 public/system/*
+db/schema.rb
