@@ -14,7 +14,7 @@ class ItemsController < SessionsController
     begin
       items_object.item_liked
     rescue => e
-      render :json => e.message, :status => 400
+      render :json => { :message => e.message }, :status => 400
       return
     end
     render :json => { :message => "Success!!" }, :status => 200
