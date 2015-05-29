@@ -31,7 +31,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'active_model_serializers', '~> 0.9.3' #Used for adding Serializers(inherent feature of rails 4)
+gem 'aws-s3', '0.6.3'  # storage api from amazon s3
+gem 'aws-sdk', '~> 1.5.7' # aws sdk
+gem 'byebug'
+gem 'pg', '0.18.1'  # postgres
+gem 'paperclip', '3.5.2' # attachments support for models
+gem 'paperclip-compression', '0.3.6'
+gem 'rest-client', '1.7.2' # making restful http calls
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

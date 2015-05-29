@@ -1,0 +1,27 @@
+REDIS_HOST: "localhost"
+ES_HOST: "localhost"
+MEMCACHE_HOST: "localhost"
+
+POSTGRES_DB_HOST: "localhost"
+POSTGRES_DB_USER: "geo_rails"
+POSTGRES_DB_PASSWORD: "123456"
+POSTGRES_DB_SU_USER: "su_geo_rails"
+POSTGRES_DB_SU_PASSWORD: "123456"
+
+S3_BUCKET: 'tinyowl-development'
+S3_ACCESS_KEY_ID: AKIAJF57XQBSA6SZXJMQ
+S3_SECRET_ACCESS_KEY: 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
+
+
+development:
+  POSTGRES_DB_NAME: "food_mate_production"
+  POSTGRES_TEST_DB_NAME: "tinyowl_test"
+  IMAGES_CLOUDFRONT_CNAME: "dv7xwibs05aww.cloudfront.net"
+
+test:
+  POSTGRES_TEST_DB_NAME: "food_mate_test"
+  IMAGES_CLOUDFRONT_CNAME: "dv7xwibs05aww.cloudfront.net"
+
+production:
+  POSTGRES_DB_NAME: "food_mate_production"
+  IMAGES_CLOUDFRONT_CNAME: "dv7xwibs05aww.cloudfront.net"
