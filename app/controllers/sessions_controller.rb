@@ -15,8 +15,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.authenticate(params[:phone], params[:password])
-    if user
+    user = User.find_by_phone(params[:phone])
+    if user && user.authenticate(params[:password])
       session_token = user.id.to_s + SecureRandom.base64(64).gsub(/[$=+\/]/,65.+(rand(25)).chr)
       user.session_token = session_token
       session[:session_token] = session_token
