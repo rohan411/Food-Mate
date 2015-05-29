@@ -17,4 +17,5 @@
 /tmp
 
 environment_variables_sample.yml
+environment_variables.yml
 public/system/*
