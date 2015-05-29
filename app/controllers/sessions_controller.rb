@@ -4,10 +4,10 @@ class SessionsController < ApplicationController
   
   def authorize
     session_token = params[:session_token] || session[:session_token]
-    if User.find_by_session_token(params[:session_token])
-      api_response (nil, "You are not logged in", 401)
+    if session_token && User.find_by_session_token(params[:session_token])
+      api_response(nil, "You are not logged in", 401)
     else
-      api_response (nil, "Missing sesion token", 400)
+      api_response(nil, "Missing sesion token", 400)
     end
   end
 
@@ -21,16 +21,16 @@ class SessionsController < ApplicationController
       user.session_token = session_token
       session[:session_token] = session_token
       user.save
-      api_response (nil, 'Logged in!!!', 200)
+      api_response(nil, 'Logged in!!!', 200)
     else
-      api_response (nil, "Invalid phone or password", 400)
+      api_response(nil, "Invalid phone or password", 400)
     end
   end
 
   def destroy
     session[:session_token] = nil
     user.update_attributes(:session_token => nil)
-    api_response (nil, 'Logged out!!!', 200)
+    api_response(nil, 'Logged out!!!', 200)
   end
 
   private 
