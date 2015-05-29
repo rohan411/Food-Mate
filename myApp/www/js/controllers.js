@@ -25,39 +25,39 @@ angular.module('starter.controllers', [])
     //     { image: 'img/pic3.png', title: 'Way too much Sand, right?'},
     //     { image: 'img/pic4.png', title: 'Beautiful sky from wherever'},
     // ];
-
+    
     var cardTypes = [];
     $http.get('http://localhost:3000/get_items/').then(function(resp) {
-        cardTypes = resp.data.payload ;
+        var cardTypes = resp.data.payload ;
+        debugger
+        $scope.cards = [];
+ 
+        $scope.addCard = function(i) {
+            var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+            newCard.id = Math.random();
+            console.log(newCard.item_image_url)
+            $scope.cards.push(angular.extend({}, newCard));
+        }
+     
+        for(var i = 0; i < cardTypes.length; i++) $scope.addCard();
+     
+        $scope.cardSwipedLeft = function(index) {
+            console.log('Left swipe');
+        }
+     
+        $scope.cardSwipedRight = function(index) {
+            console.log('Right swipe');
+        }
+     
+        $scope.cardDestroyed = function(index) {
+            $scope.cards.splice(index, 1);
+            console.log('Card removed');
+        }
       }, function(err) {
         debugger
         console.error('ERR', err);
         // err.status will contain the status code
       })
-
- debugger
-    $scope.cards = [];
- 
-    $scope.addCard = function(i) {
-        var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-        newCard.id = Math.random();
-        $scope.cards.push(angular.extend({}, newCard));
-    }
- 
-    for(var i = 0; i < 3; i++) $scope.addCard();
- 
-    $scope.cardSwipedLeft = function(index) {
-        console.log('Left swipe');
-    }
- 
-    $scope.cardSwipedRight = function(index) {
-        console.log('Right swipe');
-    }
- 
-    $scope.cardDestroyed = function(index) {
-        $scope.cards.splice(index, 1);
-        console.log('Card removed');
-    }
 })
 .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
     $scope.data = {};
