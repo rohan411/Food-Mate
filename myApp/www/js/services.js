@@ -71,14 +71,3 @@ angular.module('starter.services', [])
         }
     }
 })
-// .factory('SignUpService', function($q) {
-//     return {
-//         signUpUser: function(name, phone, password, confirm_password) {
-//             return $http.post('http://localhost:3000/sign_up',name,{
-//                 headers:{
-//                     'Content-Type':'application/json'
-//                 }
-//             });
-//         }
-//     }
-// })

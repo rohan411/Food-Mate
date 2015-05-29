@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post "log_in" => "sessions#create"
   post "sign_up" => "users#create"
   get "get_items" => "items#get_items"
-
+  get "item_liked" => "items#like_item"
   # root :to => "users#new"
   resources :users
   resources :sessions

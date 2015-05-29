@@ -7,10 +7,6 @@ class UsersController < SessionsController
 
   def create
     @user = User.new(user_params)
-    # @user.name = params[:name]
-    # @user.password = params[:password]
-    # @user.password_confirmation = params[:password_confirmation]
-    # @user.phone = params[:phone]
     if @user.save
       api_response(@user.id, 'Sign up successful', 200)
     else
