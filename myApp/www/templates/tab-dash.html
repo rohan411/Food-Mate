@@ -9,11 +9,11 @@
               on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)"
               on-partial-swipe="cardPartialSwipe(amt)">
                   <div class="title">
-                      {{card.title}}
+                      {{card.item_name}}
                   </div>
                   <div class="image">
                       <div class="no-text overlayBox"><div class="noBox boxed">Trash</div></div>
-                      <img ng-src="{{card.image}}">
+                      <img ng-src="{{card.item_image_url}}">
                       <div class="yes-text overlayBox"><div class="yesBox boxed" id="centerMe">Save</div></div>
                   </div>
               </td-card>

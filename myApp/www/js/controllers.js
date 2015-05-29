@@ -19,13 +19,23 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('CardsCtrl', function($scope) {
-    var cardTypes = [
-        { image: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png', title: 'So much grass #hippster'},
-        { image: 'img/pic3.png', title: 'Way too much Sand, right?'},
-        { image: 'img/pic4.png', title: 'Beautiful sky from wherever'},
-    ];
- 
+.controller('CardsCtrl', function($scope, $http) {
+    // var cardTypes = [
+    //     { image: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png', title: 'So much grass #hippster'},
+    //     { image: 'img/pic3.png', title: 'Way too much Sand, right?'},
+    //     { image: 'img/pic4.png', title: 'Beautiful sky from wherever'},
+    // ];
+
+    var cardTypes = [];
+    $http.get('http://localhost:3000/get_items/').then(function(resp) {
+        cardTypes = resp.data.payload ;
+      }, function(err) {
+        debugger
+        console.error('ERR', err);
+        // err.status will contain the status code
+      })
+
+ debugger
     $scope.cards = [];
  
     $scope.addCard = function(i) {

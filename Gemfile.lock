@@ -73,6 +73,7 @@ GEM
     execjs (2.5.2)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    hirb (0.7.3)
     hitimes (1.2.2)
     httparty (0.13.4)
       json (~> 1.8)
@@ -209,6 +210,7 @@ DEPENDENCIES
   aws-sdk (~> 1.5.7)
   byebug
   coffee-rails (~> 4.1.0)
+  hirb (= 0.7.3)
   jbuilder (~> 2.0)
   jquery-rails
   paperclip (= 3.5.2)
