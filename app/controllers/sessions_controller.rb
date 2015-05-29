@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
 
-  before_filter :authorize
+  before_filter :authorize, :except => [:create]
   
   def authorize
     session_token = params[:session_token] || session[:session_token]
-    if User.find_by_session_tokes(params[:session_token])
+    if User.find_by_session_token(params[:session_token])
       api_response (nil, "You are not logged in", 401)
     else
       api_response (nil, "Missing sesion token", 400)
