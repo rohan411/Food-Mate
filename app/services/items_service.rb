@@ -15,13 +15,12 @@ class ItemsService
   end
 
   def item_liked
-    debugger
     begin
       item = Item.find(params[:item_id].to_i)
     rescue
       raise StandardError.new('Item not found against the item_id')
     end
-    choice = UserChoice.where(:user_id => user_id).first
+    choice = UserChoice.find_or_create_by(:user_id => user_id)
     chosen_item_ids = choice.item_ids rescue nil
     choice.item_ids = chosen_item_ids.to_s + "," + params[:item_id].to_s
     chosen_tags = choice.tags rescue nil

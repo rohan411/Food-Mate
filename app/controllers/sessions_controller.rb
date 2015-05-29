@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     session_token = params[:session_token] || session[:session_token]
     @user = User.find_by_session_token(session_token)
     @user_id = @user.id if @user.present?
-    debugger
     if !session_token || @user.blank?
       api_response(nil, "Empty or Wrong Session Token", 401)
     end
