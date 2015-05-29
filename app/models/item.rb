@@ -5,8 +5,13 @@ class Item < ActiveRecord::Base
   :styles => {
                :medium => {:geometry => "480x360", :format => "webp"},
                :small =>  {:geometry => "320x256", :format => "webp"} 
-              }
- # :url => "/controllers/original/:style/:basename.:extension"
+              },
+  :storage => :s3,
+  :s3_credentials => Rails.root.join("config/s3.yml"),
+  :s3_host_name => 's3-ap-southeast-1.amazonaws.com',
+  :s3_host_alias => ENV['IMAGES_CLOUDFRONT_CNAME'],
+  :url => ':s3_alias_url',
+  :path => ":class/:attachment/:id/:style"
  def get_url
   self.logo.url(:medium)
  end
