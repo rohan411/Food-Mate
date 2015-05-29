@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
 
   private 
 
-  def api_response (payload, message, status)
+  def api_response(payload, message, status)
       render :json => {
             :payload => payload,
             :message => message

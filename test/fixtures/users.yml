@@ -2,10 +2,8 @@
 
 one:
   phone: MyString
-  password_hash: MyString
-  password_salt: MyString
+  password_digest: MyString
 
 two:
   phone: MyString
-  password_hash: MyString
-  password_salt: MyString
+  password_digest: MyString
