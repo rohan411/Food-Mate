@@ -10,7 +10,7 @@ POSTGRES_DB_SU_PASSWORD: "123456"
 
 development:
   POSTGRES_DB_NAME: "food_mate_production"
-  POSTGRES_TEST_DB_NAME: "tinyowl_test"
+  POSTGRES_TEST_DB_NAME: "food_mate_test"
 
 test:
   POSTGRES_TEST_DB_NAME: "food_mate_test"
