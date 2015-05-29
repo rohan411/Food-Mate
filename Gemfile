@@ -42,10 +42,8 @@ gem 'rest-client', '1.7.2' # making restful http calls
 gem 'sidekiq' # for background jobs
 gem 'sinatra', require: false # for web interface of sidekiq
 gem 'slim'    # for web interface of sidekiq
+gem 'hirb', '0.7.3' # better indentation in irb
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
