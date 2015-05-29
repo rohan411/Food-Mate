@@ -24,4 +24,11 @@ class User < ActiveRecord::Base
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:phone, :password, :password_confirmation)
+  end
+
 end
