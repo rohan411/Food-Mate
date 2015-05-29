@@ -42,9 +42,8 @@ angular.module('starter.controllers', [])
                 console.log('Left swipe');
             }
             $scope.cardSwipedRight = function(index) {
-                var item_id = cardTypes[index].id;
+                var item_id = cardTypes[index].id - 1;
                 $http.get('http://localhost:3000/item_liked/?session_token=' + window.localStorage.session_token + '&item_id=' + item_id).then(function(resp) {
-debugger
                 }, function(err) {
                 console.error('ERR', err);
                 // err.status will contain the status code

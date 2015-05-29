@@ -2,6 +2,7 @@
   <ion-content class="padding">
     <div class="list card">
       <div class="item item-body">
+        <div style="height:500px;">
           <ion-pane ng-controller="CardsCtrl">
           <td-cards>
               <td-card id="td-card" ng-repeat="card in cards" on-destroy="cardDestroyed($index)"
@@ -19,7 +20,9 @@
               </td-card>
           </td-cards>
         </ion-pane>
+        </div>
       </div>
     </div>
+    <img src="back.jpeg">
   </ion-content>
 </ion-view>
