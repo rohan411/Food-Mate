@@ -8,7 +8,7 @@ class Item < ActiveRecord::Base
               }
  # :url => "/controllers/original/:style/:basename.:extension"
  def get_url
-  "#{Rails.root}/public" + self.logo.url(:medium)
+  self.logo.url(:medium)
  end
 
  def to_item_hash
