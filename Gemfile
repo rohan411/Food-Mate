@@ -39,6 +39,9 @@ gem 'pg', '0.18.1'  # postgres
 gem 'paperclip', '3.5.2' # attachments support for models
 gem 'paperclip-compression', '0.3.6'
 gem 'rest-client', '1.7.2' # making restful http calls
+gem 'sidekiq' # for background jobs
+gem 'sinatra', require: false # for web interface of sidekiq
+gem 'slim'    # for web interface of sidekiq
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
