@@ -15,14 +15,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    debugger
-    user = User.authenticate(params[:phone], params[:password])
-    if user
+
+    user = User.find_by_phone(params[:phone])
+    if user && user.authenticate(params[:password])
       session_token = user.id.to_s + SecureRandom.base64(64).gsub(/[$=+\/]/,65.+(rand(25)).chr)
       user.session_token = session_token
       session[:session_token] = session_token
       user.save
-      api_response(nil, 'Logged in!!!', 200)
+      api_response(session_token, 'Logged in!!!', 200)
     else
       api_response(nil, "Invalid phone or password", 400)
     end
