@@ -18,13 +18,14 @@ td-card {
 
 .td-card .title {
     height: 40px;
-    font-size: 15px;
-    padding: 15px;
+    font-size: 25px;
+    padding: 10px;
+    text-align: center;
 }
 
 td-card .image {
     position: absolute;
-    top: 40px;
+    top: 0px;
     width: 100%;
 }
 
