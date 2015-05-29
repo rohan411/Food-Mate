@@ -19,6 +19,7 @@ class Item < ActiveRecord::Base
 
  def to_item_hash
    return {
+    :item_id => self.id,
     :item_name => self.name,
     :item_image_url => self.get_url,
     :collection_id => self.collection_id
