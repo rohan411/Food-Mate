@@ -12,6 +12,7 @@ class Item < ActiveRecord::Base
   :s3_host_alias => ENV['IMAGES_CLOUDFRONT_CNAME'],
   :url => ':s3_alias_url',
   :path => ":class/:attachment/:id/:style"
+
  def get_url
   self.logo.url(:medium)
  end
