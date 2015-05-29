@@ -71,26 +71,14 @@ angular.module('starter.services', [])
         }
     }
 })
-.factory('SignUpService', function($q) {
-    return {
-        signUpUser: function(name, pw) {
-          debugger
-            var deferred = $q.defer();
-            var promise = deferred.promise;
-            if (name == 'user' && pw == 'secret') {
-                deferred.resolve('Welcome ' + name + '!');
-            } else {
-                deferred.reject('Wrong credentials.');
-            }
-            promise.success = function(fn) {
-                promise.then(fn);
-                return promise;
-            }
-            promise.error = function(fn) {
-                promise.then(null, fn);
-                return promise;
-            }
-            return promise;
-        }
-    }
-})
+// .factory('SignUpService', function($q) {
+//     return {
+//         signUpUser: function(name, phone, password, confirm_password) {
+//             return $http.post('http://localhost:3000/sign_up',name,{
+//                 headers:{
+//                     'Content-Type':'application/json'
+//                 }
+//             });
+//         }
+//     }
+// })

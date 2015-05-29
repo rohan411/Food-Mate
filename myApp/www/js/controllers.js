@@ -63,18 +63,15 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('SignUpCtrl', function($scope, SignUpService, $ionicPopup, $state) {
+.controller('SignUpCtrl', function($scope, $http, $state){
     $scope.data = {};
-    $scope.sign_up = function() {
-        SignUpService.signUpUser($scope.data.username, $scope.data.password).success(function(data) {
-            debugger
-            $state.go('tab.dash');
-        }).error(function(data) {
-            debugger
-            var alertPopup = $ionicPopup.alert({
-                title: 'Login failed!',
-                template: 'Please check your credentials!'
+    $scope.sign_up = function(){
+        debugger
+      $http.post('http://localhost:3000/sign_up/', $scope.data).success(function(data) {
+                debugger
+            })
+            .error(function(data) {
+                $state.go('login');
             });
-        });
-    }
+    };
 });
