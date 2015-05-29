@@ -5,6 +5,10 @@ td-cards {
     display: block;
 }
 
+.back_image {
+    width: 100%;
+}
+
 td-card {
     position: absolute;
     left: 50%;
