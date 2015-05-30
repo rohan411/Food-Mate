@@ -54,7 +54,7 @@ td-card img {
 
 .boxed {
     height: 50px;
-    width: 100px;
+    width: 150px;
     padding: 10px;
     border-radius: 6px;
     font-size: 30px;
@@ -65,7 +65,7 @@ td-card img {
 }
 
 .yesBox {
-    margin: 10% 60% 0% 10%;
+    margin: 40% 60% 10% 10%;
     border: 2px solid #00FF00;
     color: rgb(0, 256, 0);
     -webkit-transform: rotate(-25deg);
@@ -76,7 +76,7 @@ td-card img {
 }
 
 .noBox {
-    margin: 10% 10% 0% 60%;
+    margin: 40% 60% 30% 20%;
     border: 2px solid #FF0000;
     color: rgb(256, 0, 0);
     -webkit-transform: rotate(25deg);

@@ -3,10 +3,19 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  }
+  // $scope.chats = Chats.all();
+  // $scope.remove = function(chat) {
+  //   debugger
+  //   Chats.remove(chat);
+  // }
+
+    $http.get('http://localhost:3000/get_items/?session_token=' + window.localStorage.session_token).then(function(resp)
+    {
+
+    }, function(err) {
+            console.error('ERR', err);
+            // err.status will contain the status code
+          })
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
@@ -42,8 +51,14 @@ angular.module('starter.controllers', [])
                 console.log('Left swipe');
             }
             $scope.cardSwipedRight = function(index) {
-                var item_id = cardTypes[index].id - 1;
+                var item_id = cardTypes[index].item_id ;
                 $http.get('http://localhost:3000/item_liked/?session_token=' + window.localStorage.session_token + '&item_id=' + item_id).then(function(resp) {
+                    if(resp.data.has_new_match == true){
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Match!!',
+                            template: 'You found your food buddy!!'
+                        });
+                    }
                 }, function(err) {
                 console.error('ERR', err);
                 // err.status will contain the status code
