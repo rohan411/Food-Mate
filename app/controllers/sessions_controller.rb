@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
       user.session_token = session_token
       session[:session_token] = session_token
       user.save
-      api_response(session_token, 'Logged in!!!', 200)
+      has_new_match = user.detect_match
+      api_response({ :session_token => session_token, :has_new_match => has_new_match } , 'Logged in!!!', 200)
     else
       api_response(nil, "Invalid phone or password", 400)
     end

@@ -29,6 +29,8 @@ class ItemsService
     choice.tags = tags_unsorted.split(",").sort.map { |str| "#{str}" }.join(',')
     choice.save
     BackgroundImageProcessor.perform_async(@user_id)
+    has_new_match = User.find(user_id).detect_match
+    return { :has_new_match => has_new_match }
   end
 
   private

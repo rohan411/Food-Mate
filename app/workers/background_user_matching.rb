@@ -29,7 +29,14 @@ class BackgroundUserMatching
       for i in 1...matrix.column_size()
          if matrix[0][i] > 0.3
           user_id = doc_hash[(i+1).to_s]
-          result_user_ids[user_id.to_s] = matrix[0][i]*100
+          result_user_ids[user_id.to_s] = (matrix[0][i]*100).to_i
+         end
+      end
+      result_user_ids.each do  |key, value| 
+         if UserFriend.where(:user_id => user_id, :friend_id => key).count > 0
+            UserFriend.where(:user_id => user_id, :friend_id => key).first.update_attributes(:percentage => value, :is_new_match => true)
+         else
+            UserFriend.create(:user_id => user_id, :friend_id => key, :percentage => value, :is_new_match => true)
          end
       end
       # BackgroundImageProcessor.perform_async(user_id)
