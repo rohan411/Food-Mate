@@ -70,7 +70,6 @@ angular.module('starter.controllers', [])
 .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, $http) {
     $scope.data = {};
     $scope.login = function() {
-        debugger
         if($scope.data.phone && $scope.data.password){
           $http.post('http://localhost:3000/log_in/', $scope.data).success(function(data) {
                     window.localStorage.session_token = data.payload;
@@ -96,7 +95,6 @@ angular.module('starter.controllers', [])
 .controller('SignUpCtrl', function($scope, $http, $state, $ionicPopup){
     $scope.data = {};
     $scope.sign_up = function(){
-        debugger
         if($scope.data.name && $scope.data.phone && $scope.data.password && $scope.data.password_confirmation){
           $http.post('http://localhost:3000/sign_up/', $scope.data).success(function(data) {
             var alertPopup = $ionicPopup.alert({
