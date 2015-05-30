@@ -12,11 +12,11 @@ class ItemsController < SessionsController
     end
     items_object = ItemsService.new(params, @user_id)
     begin
-      items_object.item_liked
+    new_match = items_object.item_liked
     rescue => e
       render :json => { :message => e.message }, :status => 400
       return
     end
-    render :json => { :message => "Success!!" }, :status => 200
+    render :json => { :has_new_match => new_match ,:message => "Success!!" }, :status => 200
   end
 end
