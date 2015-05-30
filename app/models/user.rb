@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     return has_new_match
   end
 
-  def get_url
+  def get_photo_url
   self.photo.url(:medium)
  end
 
@@ -41,7 +41,8 @@ class User < ActiveRecord::Base
     :id => self.id,
     :name => self.name,
     :twitter_handle => self.twitter_handle,
-    :phone => self.phone
+    :phone => self.phone,
+    :url => self.get_photo_url
    }
  end
 
