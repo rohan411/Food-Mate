@@ -2,7 +2,7 @@ class ItemsController < SessionsController
   def get_items
     items_object = ItemsService.new
     items = items_object.generate_random_items
-    render :json => {:payload => items, :meta => { :count => items.count }}, :status => 200
+    render :json => {:payload => items, :meta => { :count => items ? items.count : 0 }}, :status => 200
   end
 
   def like_item
@@ -14,7 +14,8 @@ class ItemsController < SessionsController
     begin
       items_object.item_liked
     rescue => e
-      render :json => e.message, :status => 400
+      render :json => { :message => e.message }, :status => 400
+      return
     end
     render :json => { :message => "Success!!" }, :status => 200
   end

@@ -112,6 +112,7 @@ GEM
       ruby-imagespec (~> 0.3.1)
     pg (0.18.1)
     rack (1.6.1)
+    rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -206,6 +207,7 @@ DEPENDENCIES
   paperclip (= 3.5.2)
   paperclip-compression (= 0.3.6)
   pg (= 0.18.1)
+  rack-cors (~> 0.4.0)
   rails (= 4.2.0)
   rest-client (= 1.7.2)
   sdoc (~> 0.4.0)

@@ -1,0 +1,28 @@
+<ion-view view-title="f-buddy">
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-body">
+        <div style="height:500px;">
+          <ion-pane ng-controller="CardsCtrl">
+          <td-cards>
+              <td-card id="td-card" ng-repeat="card in cards" on-destroy="cardDestroyed($index)"
+              on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)"
+              on-partial-swipe="cardPartialSwipe(amt)">
+                  <div class="image">
+                      <div class="no-text overlayBox"><div class="noBox boxed">Dis-Like</div></div>
+                      <img ng-src="{{card.item_image_url}}">
+                      <div class="yes-text overlayBox"><div class="yesBox boxed" id="centerMe">Like</div></div>
+                      <div class="title">
+                        {{card.item_name}}
+                    </div>
+                  </div>
+
+              </td-card>
+          </td-cards>
+        </ion-pane>
+        </div>
+      </div>
+    </div>
+    <img class="back_image" src="back.jpeg">
+  </ion-content>
+</ion-view>

@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   before_filter :authorize, :except => [:create]
-  
+
   def authorize
     session_token = params[:session_token] || session[:session_token]
     @user = User.find_by_session_token(session_token)
@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+
     user = User.find_by_phone(params[:phone])
     if user && user.authenticate(params[:password])
       session_token = user.id.to_s + SecureRandom.base64(64).gsub(/[$=+\/]/,65.+(rand(25)).chr)
