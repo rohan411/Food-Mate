@@ -17,6 +17,6 @@ class ItemsController < SessionsController
       render :json => { :message => e.message }, :status => 400
       return
     end
-    render :json => { :has_new_match => new_match ,:message => "Success!!" }, :status => 200
+    render :json => { :has_new_match => new_match, :message => "Success!!" }, :status => 200
   end
 end
