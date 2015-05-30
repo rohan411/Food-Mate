@@ -28,11 +28,11 @@ class BackgroundUserMatching
       delete_user_ids = []
       # matrix[0, model.document_index(document2)]
       for col in 1...matrix.column_size()
-        user_id = doc_hash[(col+1).to_s]
+        u_id = doc_hash[(col+1).to_s]
         if matrix[0, col] > 0.3
-          result_user_ids[user_id.to_s] = (matrix[0, col]*100).to_i
+          result_user_ids[u_id.to_s] = (matrix[0, col]*100).to_i
         else
-          delete_user_ids.push(user_id)
+          delete_user_ids.push(u_id)
         end
       end
       result_user_ids.each do  |key, value| 
