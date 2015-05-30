@@ -5,6 +5,11 @@ td-cards {
     display: block;
 }
 
+.bar.bar-positive {
+border-color: #2C3E50;
+background-color: #2C3E50;
+background-image: none;
+}
 .back_image {
     width: 100%;
 }

@@ -2,16 +2,16 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('ChatsCtrl', function($scope,$http, Chats) {
   // $scope.chats = Chats.all();
   // $scope.remove = function(chat) {
   //   debugger
   //   Chats.remove(chat);
   // }
 
-    $http.get('http://localhost:3000/get_items/?session_token=' + window.localStorage.session_token).then(function(resp)
+    $http.get('http://localhost:3000/user_matches/?session_token=' + window.localStorage.session_token).then(function(resp)
     {
-
+        $scope.chats = resp.data.payload ;
     }, function(err) {
             console.error('ERR', err);
             // err.status will contain the status code
@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope, $http) {
+.controller('AccountCtrl', function($scope, $http, $state) {
   $scope.log_out = function() {
         $http.get('http://localhost:3000/log_out/?session_token=' + window.localStorage.session_token).then(function(resp) {
             window.localStorage.clear();
@@ -38,6 +38,12 @@ angular.module('starter.controllers', [])
     if(window.localStorage.session_token){
         var cardTypes = [];
         $http.get('http://localhost:3000/get_items/?session_token=' + window.localStorage.session_token).then(function(resp) {
+            if(resp.data.has_new_match == true){
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Match!!',
+                            template: 'You found your food buddy!!'
+                        });
+                    }
             var cardTypes = resp.data.payload ;
             $scope.cards = [];
             $scope.addCard = function(i) {
@@ -87,7 +93,7 @@ angular.module('starter.controllers', [])
     $scope.login = function() {
         if($scope.data.phone && $scope.data.password){
           $http.post('http://localhost:3000/log_in/', $scope.data).success(function(data) {
-                    window.localStorage.session_token = data.payload;
+                    window.localStorage.session_token = data.payload.session_token;
                     $state.go('tab.dash', {}, {reload: true});
                     window.location.reload(true);
                 })
