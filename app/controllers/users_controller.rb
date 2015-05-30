@@ -14,6 +14,11 @@ class UsersController < SessionsController
     end
   end
 
+  def user_matches
+    friends = User.find(@user_id).friends.select(:id, :name, :twitter_handle, :phone)
+    api_response(friends, 'Friends', 200)
+  end
+
   private 
 
   def api_response (payload, message, status)
