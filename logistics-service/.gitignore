@@ -1,0 +1,30 @@
+## Bundler
+vendor/bundle
+.bundle/
+
+## Logs
+log/*.log
+tmp/
+
+## Misc
+*.swp
+*.DS_Store
+*.rdb
+.DS_Store
+.swo
+.idea
+
+## Yardoc documentation
+public/api_doc
+public/doc
+doc/
+.yardoc/
+
+## Coverage
+coverage
+
+## Consul Config
+config/development/*
+config/test/*
+config/feature/*
+config/production/*

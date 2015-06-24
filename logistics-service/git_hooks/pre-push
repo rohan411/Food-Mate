@@ -1,0 +1,135 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'metric_fu'
+
+class String
+  #
+  # generates the uri encoding of color code
+  # @param color_code [Integer] color integer
+  #
+  # @return [String] Uri encoded string
+  def colorize(color_code)
+    "\e[#{color_code}m#{self}\e[0m"
+  end
+
+
+  #
+  # generates the uri encoding of yellow color
+  #
+  # @return [String] Uri encoded of yellow color
+  def yellow
+    colorize(33)
+  end
+
+  #
+  # generates the uri encoding of blue color code
+  #
+  # @return [String] Uri encoded of blue color
+  def blue
+    colorize(34)
+  end
+end
+
+@remote = ARGV[0]
+
+# --------------------GET METRICS---------------------------
+
+output_file = File.expand_path('../../metrics.yml', __FILE__)
+File.delete(output_file) if File.exists?(output_file)
+run_metrics = `metric_fu --no-cane --no-churn --no-hotspots --no-rcov --no-reek --no-roodi --no-saikuro --no-stats --no-open --format yaml --out #{output_file}`
+
+metrics_data = YAML.load_file(output_file)
+flay = metrics_data[:flay][:total_score]
+
+flogs = {}
+metrics_data[:flog][:method_containers].each do |m|
+  flogs[m[:path]] = m[:highest_score] if m[:highest_score] > 25
+end
+
+not_best_practices = {}
+metrics_data[:rails_best_practices][:problems].each do |m|
+  not_best_practices["#{m[:file]}:#{m[:line]}"] = m[:problem]
+end
+
+puts "\nFlay (analyzes ruby code for structural similarities): " + flay.to_s.blue
+
+unless flogs.empty?
+  puts "Flog (measures code complexity):"
+  flogs.each do |k,v|
+    puts "  - #{k} => #{v.to_s.blue}"
+  end
+end
+
+unless not_best_practices.empty?
+  puts "Rails best practices violations:"
+  not_best_practices.each do |k,v|
+    puts "  - #{k} => #{v.to_s.blue}"
+  end
+end
+
+# --------------------GET FILES----------------------------
+branch = `git rev-parse --abbrev-ref HEAD`.strip
+commits = `git log --format=format:'%h' #{@remote}/#{branch}..#{branch}`.split("\n")
+commit_files = commits.reduce([]) do |acc, c|
+  acc << `git show --pretty="format:" --name-only #{c}`.split("\n")
+end
+
+commit_files.flatten!
+
+# --------------------RUN RSPEC----------------------------
+test_results = system('FORMAT=json bundle exec rspec')
+unless test_results
+  exit(1)
+end
+
+coverage_data = JSON.parse(File.read("coverage/coverage.json"))
+no_coverage_files = {}
+
+commit_files.each do |f|
+  file_path = File.expand_path("../../../#{f}", __FILE__)
+  file_data = coverage_data['files'].select{|x| x['filename'] == file_path}.first
+  next if file_data.nil?
+  percent = file_data['covered_percent']
+  if percent < 90
+    no_coverage_files[f] = percent
+  end
+end
+
+unless no_coverage_files.empty?
+  puts "\nTest coverage should be above 90% for:".blue
+  no_coverage_files.each do |k, v|
+    puts "- #{k} =>" + " #{v}%".blue
+  end
+  puts "\n"
+  exit(1)
+end
+
+# --------------------DOC CHECK----------------------------
+
+no_doc_files = {}
+
+commit_files.each do |f|
+  op =  `yard --query 'type == :method' #{f}`
+  match = op.match(/([0-9]+.[0-9]+)%/)
+  percent = match[1].to_f
+  if percent < 90
+    op = op.gsub(match[0], match[0].blue)
+    op = op.gsub(/Files.*\n/,'')
+    op = op.gsub(/Modules.*\n/,'')
+    op = op.gsub(/Classes.*\n/,'')
+    op = op.gsub(/Constants.*\n/,"\n")
+    no_doc_files[f] = op
+  end
+end
+
+if no_doc_files.empty?
+  exit(0)
+else
+  puts "\nDocumentation errors. Should be above 90% for: \n".blue
+  no_doc_files.each do |k, v|
+    print "- #{k.strip} :".yellow
+    puts v + "\n"
+  end
+  exit(1)
+end

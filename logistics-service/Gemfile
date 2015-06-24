@@ -1,0 +1,56 @@
+source 'https://rubygems.org'
+
+ruby '2.2.0'
+
+gem 'rails', '4.2.2'
+
+gem 'rails-api'
+
+gem 'pg'
+
+gem 'byebug'
+
+gem 'sentry-raven'
+
+gem 'diplomat', '0.6.1', :git => 'https://a892fe4b17eb65f3e67d57049060f66fefe95c61:x-oauth-basic@github.com/Flutterbee/diplomat.git'
+
+gem 'conf', '0.0.1', :git => 'https://a892fe4b17eb65f3e67d57049060f66fefe95c61:x-oauth-basic@github.com/Flutterbee/conf.git'
+
+gem 'tinylog', '0.0.2', :git => 'https://a892fe4b17eb65f3e67d57049060f66fefe95c61:x-oauth-basic@github.com/Flutterbee/tinylog.git'
+
+gem 'redis-namespace'
+
+gem 'redis-rails'
+
+gem 'whenever', :require => false
+
+gem 'sidekiq' # for background jobs
+
+gem 'sidekiq-failures' # monitoring sidekiq failed jobs
+
+gem 'sinatra', require: false # for web interface of sidekiq
+
+gem 'slim'    # for web interface of sidekiq
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'simplecov'
+  gem 'simplecov-json'
+  gem 'redcarpet'
+
+  gem 'yard-restful'
+
+  gem 'spring'
+  gem 'pry'
+
+  gem 'factory_girl_rails', '4.5.0'
+  gem 'guard-rspec', '4.5.0'
+  gem 'guard-spork', '2.1.0'
+  gem 'guard-livereload', '2.4.0'
+
+  gem 'database_cleaner'
+  gem 'shoulda-matchers', require: false
+  gem 'codeclimate-test-reporter', require: nil
+
+  gem 'metric_fu'
+end

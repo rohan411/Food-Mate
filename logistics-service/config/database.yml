@@ -1,0 +1,27 @@
+default: &default
+  host: "<%= Rails.application.config.consul_config['environment_variables']['POSTGRES_DB_HOST'] %>"
+  port: 5432
+  adapter: postgresql
+  database: "<%= Rails.application.config.consul_config['environment_variables']['POSTGRES_DB_NAME'] %>"
+  pool: 5
+  timeout: 5000
+  username: "<%= Rails.application.config.consul_config['environment_variables']['POSTGRES_DB_USER'] %>"
+  password: "<%= Rails.application.config.consul_config['environment_variables']['POSTGRES_DB_PASSWORD'] %>"
+  su_username: "<%= Rails.application.config.consul_config['environment_variables']['POSTGRES_DB_SU_USER'] %>"
+  su_password: "<%= Rails.application.config.consul_config['environment_variables']['POSTGRES_DB_SU_PASSWORD'] %>"
+
+
+development:
+  <<: *default
+
+
+test:
+  <<: *default
+
+
+production:
+  <<: *default
+
+
+feature:
+  <<: *default
